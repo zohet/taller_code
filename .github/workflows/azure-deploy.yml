@@ -1,5 +1,4 @@
 name: Deploy to Azure
-
 on:
   workflow_dispatch:
   push:
@@ -9,10 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Log in to Azure
         uses: azure/login@v1
