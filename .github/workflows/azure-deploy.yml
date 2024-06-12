@@ -1,4 +1,4 @@
-name: Azure Container Apps Deploy
+name: Deploy to Azure
 
 on:
   workflow_dispatch:
@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v3
 
       - name: Log in to Azure
@@ -21,7 +22,8 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          acrName: dzhczacr
-          containerAppName: dzhczcontainerapp
-          containerAppEnvironment: dzhczcontainerappenvironment
-          resourceGroup: wth-s3-team4-rg
+          appSourcePath: ${{ github.workspace }}
+          acrName: ${{ vars.AZURE_PREFIX }}acr
+          resourceGroup: ${{ vars.AZURE_RG }}
+          containerAppName: ${{ vars.AZURE_PREFIX }}containerapp
+          containerAppEnvironment: ${{ vars.AZURE_PREFIX }}containerappenvironment
